@@ -4,9 +4,9 @@ link_opt =
 
 rule cc
   depfile = $out.d
-  command = gcc -MD -MF $out.d -Wall -Wextra -Wshadow -fvisibility=hidden -fno-math-errno -ffp-contract=off -fno-trapping-math -fno-semantic-interposition -fmax-errors=5 -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -std=c11 $cc_opt -c -o $out $in
+  command = zig cc -MD -MF $out.d -Wall -Wextra -Wshadow -fvisibility=hidden -fno-math-errno -ffp-contract=off -fno-trapping-math -fno-semantic-interposition -fmax-errors=5 -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -std=c11 $cc_opt -c -o $out $in -target x86_64-linux-musl
 rule link
-  command = gcc $cc_opt -o $out $in $link_opt
+  command = zig cc $cc_opt -o $out $in $link_opt -target x86_64-linux-musl
 rule run
   command = $in $out
 rule create_polyfill_so
